@@ -20,53 +20,39 @@ class UserController extends Controller
 
     public function register(UserRequest $request)
     {
-        $this->userService->register($request);
+        $user =$this->userService->register($request);
 
-        Return response()->json([
-            'message' => 'Usuario registrado con éxito',
-            'user' => $request->all(),
-        ], Response::HTTP_CREATED);
+        Return response()->json(['message' => 'Usuario registrado con éxito','user' => $user,], 
+        Response::HTTP_CREATED);
     }
 
     public function index()
     {
-        $user = User::all();
-        return response()->json([
-            'message' => 'Lista de usuarios',
-            'users' => $user,
-        ], Response::HTTP_OK);
+        $user = $this->userService->index();
+
+        return response()->json(['message' => 'Lista de usuarios','users' => $user,], 
+        Response::HTTP_OK);
     }
 
     public function show_user($show_user){
        
-        try{
-            $user = User::findOrFail($show_user);
-
-        return response()->json([
-            'message' => 'Usuario encontrado',
-            'user' => $user,
-        ], Response::HTTP_OK);
+        $user = $this->userService->show_user($show_user);
+        if (!$user){
+            return response()->json(['message' => 'Usuario no encontrado',], 
+            Response::HTTP_NOT_FOUND);
         }
-        catch(\Exception $e){
-            return response()->json([
-                'message' => 'Error al buscar el usuario',
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        return response()->json(['message' => 'Usuario encontrado','user' => $user,], 
+        Response::HTTP_OK);
     }
 
     public function destroy($user){
-        try{
-            $user = User::findOrFail($user);
-            $user->delete();
-
-            return response()->json([
-                'message' => 'Usuario eliminado con éxito',
-            ], Response::HTTP_OK);
+        $user = $this->userService->destroy($user);
+        if(!$user)
+        {
+            return response()->json(['message' => 'Usuario no encontrado',], 
+            Response::HTTP_NOT_FOUND);
         }
-        catch(\Exception $e){
-            return response()->json([
-                'message' => 'Error al eliminar el usuario',
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        return response()->json(['message' => 'Usuario eliminado con éxito','user' => $user,], 
+        Response::HTTP_OK);
     }
 }

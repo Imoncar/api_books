@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\User;
-use Symfony\Component\HttpFoundation\Response;
 
 class UserService{
 
@@ -14,6 +13,30 @@ class UserService{
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
         ]);
+        return $user;
     }    
+
+    public function index()
+    {
+        $user = User::all();
+        return $user;
+    }
+
+    public function show_user($show_user)
+    {
+        $user = User::find($show_user);
+        return $user;
+
+    }
+
+    public function destroy($user)
+    {
+        $user = User::find($user);
+        if (!$user) {
+            return null;
+        }
+        $user->delete();
+        return $user;
+    }
 
 }
