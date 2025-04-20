@@ -5,27 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use App\Services\UserService;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
+    protected $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+
+    }
+
     public function register(UserRequest $request)
     {
-        $validation = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-        ]);
-
-        $user = User::create([
-            'name' => $validation['name'],
-            'email' => $validation['email'],
-            'password' => bcrypt($validation['password']),
-        ]);
+        $this->userService->register($request);
 
         Return response()->json([
             'message' => 'Usuario registrado con éxito',
-            'user' => $user,
+            'user' => $request->all(),
         ], Response::HTTP_CREATED);
     }
 
