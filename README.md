@@ -35,14 +35,19 @@ Este proyecto es una API desarrollada en Laravel para la gestión de usuarios y 
     git clone <[URL_DEL_REPOSITORIO](https://github.com/Imoncar/api_books)>
     cd <php_api_books>
 2. Instala las dependencias de PHP:
+    ```bash
     composer install
 3. Configura el archivo .env: Copia el archivo de ejemplo
+    ```bash
     cp .env.example .env
 4. Genera la clave de la aplicación:
+    ```bash
     php artisan key:generate
 5. Ejecuta las migraciones:
+    ```bash
     php artisan migrate
 6. Inicia el servidor de desarrollo:
+    ```bash
     php artisan serve
 
 ---
