@@ -5,26 +5,26 @@ Este proyecto es una API desarrollada en Laravel para la gestión de usuarios y 
 ## Características Actuales
 
 ### Usuarios
-- [x] Crear usuarios
-- [x] Ver todos los usuarios
-- [x] Ver un usuario individual
-- [x] Eliminar usuarios(softdelete)
-- [ ] Editar usuarios
+- ✅ Crear usuarios
+- ✅ Ver todos los usuarios
+- ✅ Ver un usuario individual
+- ✅ Eliminar usuarios(softdelete)
+- 🟡 Editar usuarios
 
 ### Libros (Futuro Desarrollo)
-- [ ] Crear libros
-- [ ] Ver todos los libros
-- [ ] Ver un libro individual
-- [ ] Actualizar libros
-- [ ] Eliminar libros
+- 🔴 Crear libros
+- 🔴 Ver todos los libros
+- 🔴 Ver un libro individual
+- 🔴 Actualizar libros
+- 🔴 Eliminar libros
 
 ### Autenticación
-- [ ] Implementar autenticación de usuarios (por ejemplo, con Laravel Sanctum o Passport)
+- 🔴 Implementar autenticación de usuarios (por ejemplo, con Laravel Sanctum o Passport)
 
 ### Relaciones entre Tablas (Futuro Desarrollo)
-- [ ] Relacionar libros con autores
-- [ ] Relacionar libros con categorías
-- [ ] Relacionar libros con editoriales
+- 🔴 Relacionar libros con autores
+- 🔴 Relacionar libros con categorías
+- 🔴 Relacionar libros con editoriales
 
 ---
 
