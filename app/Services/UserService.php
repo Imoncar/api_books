@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 
 class UserService{
@@ -36,6 +37,21 @@ class UserService{
             return null;
         }
         $user->delete();
+        return $user;
+    }
+
+    public function edit($user, UserRequest $request)
+    {
+        $user = User::find($user);
+        if (!$user) {
+            return null;
+        }
+        $data = $request->only(['name', 'email', 'password']);
+        if(isset($data['password'])){
+            $data['password'] = bcrypt($data['password']);
+        }
+        $user->update($data);
+
         return $user;
     }
 

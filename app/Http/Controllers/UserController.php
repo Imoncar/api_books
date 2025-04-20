@@ -55,4 +55,14 @@ class UserController extends Controller
         return response()->json(['message' => 'Usuario eliminado con éxito','user' => $user,], 
         Response::HTTP_OK);
     }
+
+    public function update($user, UserRequest $request){
+        $user = $this->userService->edit($user, $request);
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado',], 
+            Response::HTTP_NOT_FOUND);
+        }
+        return response()->json(['message' => 'Usuario actualizado con éxito','user' => $user,], 
+        Response::HTTP_OK);
+    }
 }

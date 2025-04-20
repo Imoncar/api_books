@@ -21,11 +21,25 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-        ];
+        $userId = $this->route('user'); // Obtiene el ID del usuario desde la ruta
+    
+        if ($this->isMethod('post')) {
+            $rules = [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:8',
+            ];
+        }
+    
+        if ($this->isMethod('put')) {
+            $rules = [
+                'name' => 'nullable|string|max:255',
+                'email' => 'nullable|string|email|max:255|unique:users,email,' . $userId,
+                'password' => 'nullable|string|min:8',
+            ];
+        }
+    
+        return $rules;
     }
 
     public function messages(){
